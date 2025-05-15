@@ -1,0 +1,266 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Controllers\BaseController;
+use App\Models\ModelPs;
+use App\Models\ModelS;
+use App\Libraries\CodePlayHelper;
+use App\Libraries\Notification;
+
+class Login_Ptba extends BaseController
+{
+  protected $session;
+  protected $ModelPs;
+  public function __construct()
+  {
+    $this->library = new CodePlayHelper();
+    $this->ModelPs = new ModelPs();
+    $this->ModelS = new ModelS();
+    $this->session = \Config\Services::session();
+  }
+
+  public function index()
+  {
+    return view('Login_Ptba_View');
+  }
+
+  public function homepage()
+  {
+    $session=\Config\Services::session();
+    if(empty($session->get('SESSION_SUIVIE_PTBA_USER_ID')))
+    {
+      return redirect('Login_Ptba');
+    }
+    $data=$this->urichk();
+    return view('Bienvenupage',$data);
+  }
+
+  public function login ($value='')
+  {
+    $session = \Config\Services::session();
+    $db = db_connect();
+    $ModelPs = new ModelPs();
+    $USERNAME = $this->request->getPost('inputUsername');
+    $PASSWORD = $this->request->getPost('inputPassword');
+    $bindparams = $this->getBindParms('*', 'user_users', ' USER_NAME LIKE "' . $USERNAME . '"', ' USER_NAME DESC');
+    $callpsreq = "CALL `getRequete`(?,?,?,?);";  
+    $connexion = $ModelPs->getRequeteOne($callpsreq, $bindparams);
+
+    $TYPE_USER='';
+    $statutconnexion = '';
+    $authentification = '';
+    $updateIntoTable='user_users';
+
+    if(!empty($connexion['USER_NAME']))
+    {
+      if($connexion['PASSWORD']==md5($PASSWORD))
+      {
+        if($connexion['IS_ACTIVE']==1)
+        {
+          $bindparamss=$this->getBindParms('*','user_profil',' PROFIL_ID="'.$connexion['PROFIL_ID'].'"','PROFIL_ID DESC');
+          $profil = $ModelPs->getRequeteOne($callpsreq, $bindparamss);
+          $usersExiste=1;
+          $bindparamss=$this->getBindParms('*','user_profil',' PROFIL_ID="'.$connexion['PROFIL_ID'].'"',' PROFIL_ID DESC');
+          $profil = $ModelPs->getRequeteOne($callpsreq, $bindparamss);
+          $usersExiste=1;
+          $newdata = [
+            'SESSION_SUIVIE_PTBA_USER_ID'=>$connexion['USER_ID'],
+            'SESSION_SUIVIE_PTBA_USER_NAME'=>$connexion['USER_NAME'],
+            'SESSION_SUIVIE_PTBA_NOM'=>$connexion['NOM'],
+            'SESSION_SUIVIE_PTBA_PRENOM'=>$connexion['PRENOM'],
+            'SESSION_SUIVIE_PTBA_PROFIL_ID'=>$connexion['PROFIL_ID'],
+            'SESSION_SUIVIE_PTBA_PROFIL_DESCRIPTION'=>$profil['PROFIL_DESCR'],
+            'SESSION_SUIVIE_PTBA_NIVEAU_VISUALISATION_ID'=>$profil['NIVEAU_VISUALISATION_ID'],
+            'SESSION_SUIVIE_PTBA_PROFIL_NIVEAU_ID'=>$profil['PROFIL_NIVEAU_ID'],
+            'SESSION_SUIVIE_PTBA_UTILISATEURS'=>$profil['UTILISATEURS'],
+            'SESSION_SUIVIE_PTBA_PROFIL'=>$profil['PROFIL'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_TAUX_TCD_ENGAGEMENT'=>$profil['TABLEAU_BORD_TAUX_TCD_ENGAGEMENT'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_TAUX_EXECUTION_PHASE'=>$profil['TABLEAU_BORD_TAUX_EXECUTION_PHASE'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_TCD_VALEUR_PHASE'=>$profil['TABLEAU_BORD_TCD_VALEUR_PHASE'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_TCD_VALEUR_INSTITUTION'=>$profil['TABLEAU_BORD_TCD_VALEUR_INSTITUTION'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_TAUX_TCD_BUDGET_VOTE_INST'=>$profil['TABLEAU_BORD_TAUX_TCD_BUDGET_VOTE_INST'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_PERFORMANCE_EXECUTION'=>$profil['TABLEAU_BORD_PERFORMANCE_EXECUTION'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_BUDGET'=>$profil['TABLEAU_BORD_BUDGET'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_EXECUTION_BUDGETAIRE'=>$profil['TABLEAU_BORD_EXECUTION_BUDGETAIRE'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_VOTE_VS_EXECUTION_BUDG'=>$profil['TABLEAU_BORD_VOTE_VS_EXECUTION_BUDG'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_GRANDE_MASSE'=>$profil['TABLEAU_BORD_GRANDE_MASSE'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_ALLOCAT_BUDG_INSTITUTION'=>$profil['TABLEAU_BORD_ALLOCAT_BUDG_INSTITUTION'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_DEPASSEMENT_BUDG_VOTE'=>$profil['TABLEAU_BORD_DEPASSEMENT_BUDG_VOTE'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_TRANSFERT'=>$profil['TABLEAU_BORD_TRANSFERT'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_PIP_TDB_PIP'=>$profil['TABLEAU_BORD_PIP_TDB_PIP'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_PIP_MINISTRE_INSTITUTION'=>$profil['TABLEAU_BORD_PIP_MINISTRE_INSTITUTION'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_PIP_FINANCEMENT'=>$profil['TABLEAU_BORD_PIP_FINANCEMENT'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_PIP_PROGRAMME_BUDGETAIRE'=>$profil['TABLEAU_BORD_PIP_PROGRAMME_BUDGETAIRE'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_PIP_STATUT_PROJET'=>$profil['TABLEAU_BORD_PIP_STATUT_PROJET'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_PIP_PILIER'=>$profil['TABLEAU_BORD_PIP_PILIER'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_PIP_OBJECTIF_STRATEGIQUE'=>$profil['TABLEAU_BORD_PIP_OBJECTIF_STRATEGIQUE'],
+            'SESSION_SUIVIE_PTBA_TABLEAU_BORD_PIP_AXE_INTERVENTION'=>$profil['TABLEAU_BORD_PIP_AXE_INTERVENTION'],
+            'SESSION_SUIVIE_PTBA_RAPPORTS_SUIVI_EVALUATION'=>$profil['RAPPORTS_SUIVI_EVALUATION'],
+            'SESSION_SUIVIE_PTBA_RAPPORTS_CLASSIFICATION_ADMINISTRATIVE'=>$profil['RAPPORTS_CLASSIFICATION_ADMINISTRATIVE'],
+            'SESSION_SUIVIE_PTBA_RAPPORTS_CLASSIFICATION_FONCTIONNEL'=>$profil['RAPPORTS_CLASSIFICATION_FONCTIONNEL'],
+            'SESSION_SUIVIE_PTBA_RAPPORTS_CLASSIFICATION_ECONOMIQUE'=>$profil['RAPPORTS_CLASSIFICATION_ECONOMIQUE'],
+            'SESSION_SUIVIE_PTBA_PTBA_INSTITUTION'=>$profil['PTBA_INSTITUTION'],
+            'SESSION_SUIVIE_PTBA_PTBA_PROGRAMMES'=>$profil['PTBA_PROGRAMMES'],
+            'SESSION_SUIVIE_PTBA_PTBA_ACTIONS'=>$profil['PTBA_ACTIONS'],
+            'SESSION_SUIVIE_PTBA_PTBA_ACTIVITES'=>$profil['PTBA_ACTIVITES'],
+            // CLASSIFICATION
+            'SESSION_SUIVIE_PTBA_PTBA_CLASSIFICATION_ECONOMIQUE'=>$profil['PTBA_CLASSIFICATION_ECONOMIQUE'],
+            'SESSION_SUIVIE_PTBA_PTBA_CLASSIFICATION_ADMINISTRATIVE'=>$profil['PTBA_CLASSIFICATION_ADMINISTRATIVE'],
+            'SESSION_SUIVIE_PTBA_PTBA_CLASSIFICATION_FONCTIONNELLE'=>$profil['PTBA_CLASSIFICATION_FONCTIONNELLE'],
+            // DEBUT DOUBLE COMMANDE
+            //ENGAGEMENT BUDGETAIRE
+            'SESSION_SUIVIE_PTBA_ENGAG_BUDGETAIRE'=>$profil['IS_ENGAGEMENT_BUDGETAIRE'],
+            'SESSION_SUIVIE_PTBA_ENGAG_BUDGETAIRE_SANS_BON'=>$profil['IS_ENGAGEMENT_BUDGETAIRE_SANS_BON'],
+            'SESSION_SUIVIE_PTBA_ENGAG_BUDGETAIRE_CONFIRM_CED'=>$profil['IS_CONFIRMATION_ENGAGEMENT_BUDGETAIRE_CED'],
+            'SESSION_SUIVIE_PTBA_ENGAG_BUDGETAIRE_CORRECTION'=>$profil['IS_ENGAGEMENT_BUDGETAIRE_CORRECTION'],
+            'SESSION_SUIVIE_PTBA_ENGAG_BUDGETAIRE_ANNULER'=>$profil['IS_ENGAGEMENT_BUDGETAIRE_ANNULER'],
+            //ENGAGEMENT JURIDIQUE
+            'SESSION_SUIVIE_PTBA_ENGAG_JURIDIQUE'=>$profil['IS_ENGAGEMENT_JURIDIQUE'],
+            'SESSION_SUIVIE_PTBA_ENGAG_JURIDIQUE_CONFIRM_CED'=>$profil['IS_CONFIRMATION_ENGAGEMENT_JURIDIQUE'],
+            'SESSION_SUIVIE_PTBA_ENGAG_JURIDIQUE_CORRECTION'=>$profil['IS_ENGAGEMENT_JURIDIQUE_CORRECTION'],
+            'SESSION_SUIVIE_PTBA_ENGAG_JURIDIQUE_ANNULER'=>$profil['IS_ENGAGEMENT_JURIDIQUE_ANNULER'],
+            //LIQUIDATION
+            'SESSION_SUIVIE_PTBA_LIQUIDATION'=>$profil['IS_ENGAGEMENT_LIQUIDATION'],
+            'SESSION_SUIVIE_PTBA_CONFIRM_LIQUIDATION'=>$profil['IS_CONFIRMATION_ENGAGEMENT_LIQUIDATION'],
+            'SESSION_SUIVIE_PTBA_LIQUIDATION_CORRECTION'=>$profil['IS_LIQUIDATION_CORRECTION'],
+            'SESSION_SUIVIE_PTBA_LIQUIDATION_ANNULER'=>$profil['IS_LIQUIDATION_ANNULER'],
+            'SESSION_SUIVIE_PTBA_LIQUIDATION_DECISION_CED'=>$profil['IS_LIQUIDATION_DECISION_CED'],
+            //ORDONNANCEMENT
+            'SESSION_SUIVIE_PTBA_ORDONNANCEMENT'=>$profil['IS_ORDONNANCEMENT'],
+            'SESSION_SUIVIE_PTBA_ORDONNANCEMENT_MINISTRE'=>$profil['IS_ORDONNANCEMENT_MINISTRE'],
+            'SESSION_SUIVIE_PTBA_TRANSMISSION_BON_CABINET'=>$profil['IS_TRANSMISSION_BON_CABINET'],
+            'SESSION_SUIVIE_PTBA_TRANSMISSION_CABINET_SPE'=>$profil['IS_TRANSMISSION_CABINET_SPE'],
+            'SESSION_SUIVIE_PTBA_ORDONNANCEMENT_CORRECTION_CED'=>$profil['ORDONNANCEMENT_CORRECTION_CED'],
+            'SESSION_SUIVIE_PTBA_ORDONNANCEMENT_DEJA_VALIDE'=>$profil['IS_ORDONNANCEMENT_DEJA_VALIDE'],
+            'SESSION_SUIVIE_PTBA_TRANSMISSION_PRISE_CHARGE'=>$profil['IS_TRANSMISSION_SERVICE_PRISE_COMPTE'],
+            //PAIEMENT
+            'SESSION_SUIVIE_PTBA_PAIEMENT'=>$profil['IS_PAIEMENT'],
+            'SESSION_SUIVIE_PTBA_RECEPTION_DIR_COMPTABLE'=>$profil['IS_RECEPTION_DIRECTEUR_COMPTABLE'],
+            'SESSION_SUIVIE_PTBA_TITRE_SIGNATURE_DIR_COMPTABILITE'=>$profil['IS_TITRE_SIGNATURE_DIR_COMPTABILITE'],
+            'SESSION_SUIVIE_PTBA_TITRE_SIGNATURE_DGFP'=>$profil['IS_TITRE_SIGNATURE_DGFP'],
+            'SESSION_SUIVIE_PTBA_TITRE_SIGNATURE_MINISTRE'=>$profil['IS_TITRE_SIGNATURE_MINISTRE'],
+            'SESSION_SUIVIE_PTBA_RECEPTION_PRISE_CHARGE'=>$profil['IS_RECEPTION_SERVICE_PRISE_COMPTE'],
+            'SESSION_SUIVIE_PTBA_TRANSMISSION_OBR'=>$profil['TRANSMISSION_OBR'],
+            'SESSION_SUIVIE_PTBA_RECEPTION_OBR'=>$profil['RECEPTION_OBR'],
+             'SESSION_SUIVIE_PTBA_CONTROLE_BRB'=>$profil['CONTROLE_BRB'],
+            'SESSION_SUIVIE_PTBA_CONTROLE_BESD'=>$profil['CONTROLE_BESD'],
+            'SESSION_SUIVIE_PTBA_TRANSMISSION_BRB_MINFIN'=>$profil['TRANSMISSION_BRB_MINFIN'],
+            
+            'SESSION_SUIVIE_PTBA_AVANT_PRISE_CHARGE'=>$profil['IS_AVANT_PRISE_CHARGE'],
+            'SESSION_SUIVIE_PTBA_PRISE_EN_CHARGE'=>$profil['IS_PRISE_EN_CHARGE'],
+            'SESSION_SUIVIE_PTBA_ETABLISSEMENT_TITRE_DECAISSEMENT'=>$profil['IS_ETABLISSEMENT_TITRE_DECAISSEMENT'],
+            'SESSION_SUIVIE_PTBA_TRANSMISSION_DIR_COMPTABLE'=>$profil['IS_TRANSMISSION_DIRECTEUR_COMPTABLE'],
+            'SESSION_SUIVIE_PTBA_DOUBLE_COMMANDE_VALIDE_TD'=>$profil['DOUBLE_COMMANDE_VALIDE_TD'],
+            'SESSION_SUIVIE_PTBA_TRANSMISSION_BRB'=>$profil['IS_TRANSMISSION_BRB'],
+            //DECAISSEMENT
+            'SESSION_SUIVIE_PTBA_RECEPTION_BRB'=>$profil['IS_RECEPTION_BRB'],
+            'SESSION_SUIVIE_PTBA_DECAISSEMENT'=>$profil['IS_DECAISSEMENT'],
+            'SESSION_SUIVIE_PTBA_FIN_PROCESSUS'=>$profil['IS_FIN_PROCESSUS'],
+            //TRANSFERT
+            'SESSION_SUIVIE_PTBA_DOUBLE_COMMANDE_TRANSFERT'=>$profil['DOUBLE_COMMANDE_TRANSFERT'],
+            //ETAT AVANCEMENT
+            'SESSION_SUIVIE_PTBA_DOUBLE_COMMANDE_ETAT_AVANCEMENT'=>$profil['DOUBLE_COMMANDE_ETAT_AVANCEMENT'],
+            // BENEFICIAIRE
+            'SESSION_SUIVIE_PTBA_DOUBLE_COMMANDE_PRESTATAIRE'=>$profil['DOUBLE_COMMANDE_PRESTATAIRE'],
+            // SUIVI EXECUTION ET PTBA
+            'SESSION_SUIVIE_PTBA_SUIVI_EXECUTION'=>$profil['SUIVI_EXECUTION'],
+            'SESSION_SUIVIE_PTBA_SUIVI_PTBA'=>$profil['SUIVI_PTBA'],
+            // TAUX DOUBLE COMMANDE
+            'SESSION_SUIVIE_PTBA_DOUBLE_COMMANDE_TAUX'=>$profil['TAUX_DOUBLE_COMMANDE'],
+            //FIN DOUBLE COMMANDE
+            // DEBUT MODULE PIP
+            'SESSION_SUIVIE_PTBA_PIP_EXECUTION'=>$profil['PIP_EXECUTION'],
+            'SESSION_SUIVIE_PTBA_PIP_COMPILE'=>$profil['PIP_COMPILE'],
+            'SESSION_SUIVIE_PTBA_PIP_TAUX_ECHANGE'=>$profil['PIP_TAUX_ECHANGE'],
+            'SESSION_SUIVIE_PTBA_PIP_POURCENTAGE_NOMENCLATURE'=>$profil['PIP_POURCENTAGE_NOMENCLATURE'],
+            'SESSION_SUIVIE_PTBA_PIP_SOURCE_FINANCEMENT'=>$profil['PIP_SOURCE_FINANCEMENT'],
+            'SESSION_SUIVIE_PTBA_DEMANDE_PLANIFICATION_STRATEGIQUE'=>$profil['DEMANDE_PLANIFICATION_STRATEGIQUE'],
+            'SESSION_SUIVIE_PTBA_DEMANDE_PLANIFICATION_CDMT_CBMT'=>$profil['DEMANDE_PLANIFICATION_CDMT_CBMT'],
+            'SESSION_SUIVIE_PTBA_DEMANDE_PROGRAMMATION_BUDGETAIRE'=>$profil['DEMANDE_PROGRAMMATION_BUDGETAIRE'],
+            'SESSION_SUIVIE_PTBA_DEMANDE_ETAT_AVANCEMENT'=>$profil['DEMANDE_ETAT_AVANCEMENT'],
+            'SESSION_SUIVIE_PTBA_PARAMETRE_PROCESSUS'=>$profil['PARAMETRE_PROCESSUS'],
+            'SESSION_SUIVIE_PTBA_PARAMETRE_ETAPE'=>$profil['PARAMETRE_ETAPE'],
+            'SESSION_SUIVIE_PTBA_PARAMETRE_ACTION'=>$profil['PARAMETRE_ACTION'],
+            'SESSION_SUIVIE_PTBA_PARAMETRE_DOCUMENTS'=>$profil['PARAMETRE_DOCUMENTS'],
+            'SESSION_SUIVIE_PTBA_PARAMETRE_INFO_SUPPLEMENTAIRE'=>$profil['PARAMETRE_INFO_SUPPLEMENTAIRE'],
+            'SESSION_SUIVIE_PTBA_MASQUE_SAISI_ENJEUX'=>$profil['MASQUE_SAISI_ENJEUX'],
+            'SESSION_SUIVIE_PTBA_MASQUE_SAISI_INSTITUTION'=>$profil['MASQUE_SAISI_INSTITUTION'],
+            'SESSION_SUIVIE_PTBA_MASQUE_SAISI_PTBA_PROGRAMMES'=>$profil['MASQUE_SAISI_PTBA_PROGRAMMES'],
+            'SESSION_SUIVIE_PTBA_MASQUE_SAISI_PTBA_ACTIONS'=>$profil['MASQUE_SAISI_PTBA_ACTIONS'],
+            'SESSION_SUIVIE_PTBA_MASQUE_SAISI_PTBA_ACTIVITES'=>$profil['MASQUE_SAISI_PTBA_ACTIVITES'],
+            'SESSION_SUIVIE_PTBA_MASQUE_SAISI_OBSERVATION_FINANCIERES'=>$profil['MASQUE_SAISI_OBSERVATION_FINANCIERES'],
+            'SESSION_SUIVIE_PTBA_GEOLOCALISATION_CARTE_INSTITUTION'=>$profil['GEOLOCALISATION_CARTE_INSTITUTION'],
+            // DOUBLE COMMANDE SALAIRE
+            'SESSION_SUIVIE_PTBA_LIQUIDATION_SALAIRE'=>$profil['LIQUIDATION_SALAIRE'],
+            'SESSION_SUIVIE_PTBA_CONFIRM_LIQUIDATION_SALAIRE'=>$profil['CONFIRM_LIQUIDATION_SALAIRE'],
+
+              'SESSION_SUIVIE_PTBA_CORRECTION_LIQUIDATION_SALAIRE'=>$profil['CORRECTION_LIQUIDATION_SALAIRE'],
+
+            'SESSION_SUIVIE_PTBA_ORDONANCEMENT_SALAIRE'=>$profil['ORDONANCEMENT_SALAIRE'],
+           
+            'SESSION_SUIVIE_PTBA_PRISE_CHARGE_SALAIRE'=>$profil['PRISE_CHARGE_SALAIRE'],
+            'SESSION_SUIVIE_PTBA_ETABLISSEMENT_TD_NET'=>$profil['ETABLISSEMENT_TD_NET'],
+            'SESSION_SUIVIE_PTBA_ETABLISSEMENT_TD_RETENUS'=>$profil['ETABLISSEMENT_TD_RETENUS'],
+            'SESSION_SUIVIE_PTBA_SIGNATURE_DIR_COMPT_SALAIRE'=>$profil['SIGNATURE_DIR_COMPT_SALAIRE'],
+            'SESSION_SUIVIE_PTBA_SIGNATURE_DGFP_SALAIRE'=>$profil['SIGNATURE_DGFP_SALAIRE'],
+            'SESSION_SUIVIE_PTBA_SIGNATURE_MIN_SALAIRE'=>$profil['SIGNATURE_MIN_SALAIRE'],
+            'SESSION_SUIVIE_PTBA_VALIDATION_SALAIRE_NET'=>$profil['VALIDATION_SALAIRE_NET'],
+            'SESSION_SUIVIE_PTBA_VALIDATION_RETENUS_SALAIRE'=>$profil['VALIDATION_RETENUS_SALAIRE'],
+            'SESSION_SUIVIE_PTBA_DECAISSEMENT_SALAIRE'=>$profil['DECAISSEMENT_SALAIRE'],
+            'logged_in' => true,
+          ];
+
+
+
+
+          $session->set($newdata);      
+        }
+        else
+        {
+          $usersExiste=2;          
+        }
+      }
+      else
+      {
+        $usersExiste=0;
+      }
+    }
+    else
+    {
+      $usersExiste=0;
+    }
+    echo json_encode(array('usersExiste'=>$usersExiste,'statutconnexion'=>$statutconnexion));                
+  }
+
+  public function do_logout()
+  {
+    $session=session();
+    $session->destroy();
+    return view('Login_Ptba_View');
+  }
+
+  /**
+    * @author jules@mediabox.bi
+    * fonction pour retourner le tableau des parametre pour le PS pour les selection
+    * @param string  $columnselect //colone A selectionner
+    * @param string  $table        //table utilisE
+    * @param string  $where        //condition dans la clause where
+    * @param string  $orderby      //order by
+    * @return  mixed
+  */
+  public function getBindParms($columnselect, $table, $where, $orderby)
+  {
+    $db = db_connect();
+    $bindparams =[$db->escapeString($columnselect),$db->escapeString($table),$where,$db->escapeString($orderby)];
+    return $bindparams;
+  }
+  /* update table */
+  function update_all_table($table,$datatomodifie,$conditions)
+  {
+    $bindparams =[$table,$datatomodifie,$conditions];
+    $updateRequete = "CALL `updateData`(?,?,?);";
+    $resultat=$this->ModelPs->createUpdateDelete($updateRequete, $bindparams);
+  }
+}
+?>

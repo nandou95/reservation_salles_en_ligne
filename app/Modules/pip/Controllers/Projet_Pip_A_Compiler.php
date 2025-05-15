@@ -1,0 +1,186 @@
+<?php
+
+/*
+  @author MUNEZERO Sonia
+ * +25765165772
+ * sonia@mediabox.bi
+ * 02/01/2024
+ * Liste des projet à compiler
+*/
+
+  namespace App\Modules\pip\Controllers;
+
+  use App\Controllers\BaseController;
+  use App\Models\ModelPs;
+  use App\Libraries\CodePlayHelper;
+  ini_set('max_execution_time', 0);
+  ini_set('memory_limit','12048M');
+
+  class Projet_Pip_A_Compiler extends BaseController
+  {
+  	protected $library;
+  	protected $ModelPs;
+  	protected $session;
+  	protected $validation;
+
+  	function __construct()
+  	{
+  		$this->library = new CodePlayHelper();
+  		$this->ModelPs = new ModelPs();
+  		$this->session = \Config\Services::session();
+  		$this->validation = \Config\Services::validation();
+  	}
+
+  	public function getBindParms($columnselect, $table, $where, $orderby)
+  	{
+  		$db = db_connect();
+  		$bindparams = [$db->escapeString($columnselect), $db->escapeString($table), $db->escapeString($where), $db->escapeString($orderby)];
+  		return $bindparams;
+  	}
+
+  	function liste_pip_compiler()
+  	{
+  		$session  = \Config\Services::session();
+
+  		$data = $this->urichk();
+  		$psgetrequete = "CALL getRequete(?,?,?,?);";
+
+  		$USER_ID =session()->get("SESSION_SUIVIE_PTBA_USER_ID");
+  		$PROFIL_ID = session()->get("SESSION_SUIVIE_PTBA_PROFIL_ID");
+
+  		if(empty($USER_ID))
+  		{
+  			return redirect('Login_Ptba/do_logout');
+  		}
+
+  		if($session->get('SESSION_SUIVIE_PTBA_PIP_COMPILE')!=1)
+  		{
+  			return redirect('Login_Ptba/homepage');
+  		}
+
+  		$step = $this->getBindParms('CODE_INSTITUTION,DESCRIPTION_INSTITUTION,INSTITUTION_ID','inst_institutions','1','INSTITUTION_ID ASC');
+  		$data['institution']= $this->ModelPs->getRequete($psgetrequete, $step);
+
+  		$compilerMenu=$this->pip_compile();
+  		$data['compilation']=$compilerMenu['compilation'];
+  		$data['pip_proposer']=$compilerMenu['pip_proposer'];
+  		$data['pip_corriger'] = $compilerMenu['pip_corriger'];
+  		$data['pip_valider'] = $compilerMenu['pip_valider'];
+
+  		return view('App\Modules\pip\Views\Projet_Pip_A_Compiler_List_View',$data);
+  	}
+
+  	function liste_projet_compiler()
+  	{
+  		$session  = \Config\Services::session();
+
+  		$INSTITUTION_ID = $this->request->getPost('INSTITUTION_ID');
+  		$USER_ID =session()->get("SESSION_SUIVIE_PTBA_USER_ID");
+  		$PROFIL_ID = session()->get("SESSION_SUIVIE_PTBA_PROFIL_ID");
+
+  		if(empty($USER_ID))
+  		{
+  			return redirect('Login_Ptba/do_logout');
+  		}
+
+  		if($session->get('SESSION_SUIVIE_PTBA_PIP_COMPILE')!=1)
+  		{
+  			return redirect('Login_Ptba/homepage');
+  		}
+
+  		$critere1="";
+
+  		if(!empty($INSTITUTION_ID))
+  		{
+  			$critere1=" AND inst_institutions.INSTITUTION_ID=".$INSTITUTION_ID;
+  		}
+
+  		$query_principal = "SELECT statut.DESCR_STATUT_PROJET,info_sup.NOM_PROJET,info_sup.NUMERO_PROJET,demande.ID_DEMANDE,demande.DATE_INSERTION,inst_institutions.INSTITUTION_ID,inst_institutions.DESCRIPTION_INSTITUTION,etape.DESCR_ETAPE FROM pip_demande_infos_supp info_sup LEFT JOIN inst_institutions ON info_sup.INSTITUTION_ID = inst_institutions.INSTITUTION_ID LEFT JOIN proc_demandes demande ON demande.ID_DEMANDE = info_sup.ID_DEMANDE LEFT JOIN proc_etape etape ON demande.ETAPE_ID = etape.ETAPE_ID JOIN proc_actions ON proc_actions.ETAPE_ID = etape.ETAPE_ID LEFT JOIN proc_process ON demande.PROCESS_ID = proc_process.PROCESS_ID LEFT JOIN pip_statut_projet statut ON info_sup.ID_STATUT_PROJET = statut.ID_STATUT_PROJET WHERE demande.PROCESS_ID = 1  AND info_sup.IS_COMPILE = 0 AND info_sup.IS_FINISHED = 1 AND proc_actions.IS_COMPILE=1 AND GET_FORM=1";
+
+  		$var_search= !empty($_POST['search']['value']) ? $_POST['search']['value'] : null;
+  		$limit='LIMIT 0,10';
+
+  		if($_POST['length'] != -1)
+  		{
+  			$limit='LIMIT '.$_POST["start"].','.$_POST["length"];
+  		}
+
+  		$order_by='';
+  		$order_column='';
+  		$order_column= array(1,'info_sup.NUMERO_PROJET','info_sup.NOM_PROJET','inst_institutions.DESCRIPTION_INSTITUTION','etape.DESCR_ETAPE','statut.DESCR_STATUT_PROJET',1);
+
+  		$order_by = isset($_POST['order']) ? ' ORDER BY '. $order_column[$_POST['order']['0']['column']] .'  '.$_POST['order']['0']['dir'] : ' ORDER BY demande.ID_DEMANDE ASC';
+
+  		$search = !empty($_POST['search']['value']) ?  (" AND (info_sup.NUMERO_PROJET LIKE '%$var_search%' OR info_sup.NOM_PROJET LIKE '%$var_search%' OR etape.DESCR_ETAPE LIKE '%$var_search%' OR statut.DESCR_STATUT_PROJET LIKE '%$var_search%' OR inst_institutions.DESCRIPTION_INSTITUTION LIKE '%$var_search%')"):'';
+
+  		$critaire = $critere1;
+  		$query_secondaire=$query_principal.' '.$search.' '.$critaire.' '.$order_by.'   '.$limit;
+
+  		$query_filter = $query_principal.' '.$search.' '.$critaire;
+  		$requete='CALL `getList`("'.$query_secondaire.'")';
+  		$fetch_cov_frais = $this->ModelPs->datatable( $requete);
+  		$data = array();
+  		$u=1;
+
+  		foreach($fetch_cov_frais as $info)
+  		{
+  			$post=array();
+
+  			$NOM_PROJET='';
+  			if(strlen($info->NOM_PROJET) > 3)
+  			{
+  				$NOM_PROJET =  substr($info->NOM_PROJET, 0, 3) .'...<a class="btn-sm" title="'.$info->NOM_PROJET.'"><i class="fa fa-eye"></i></a>';
+  			}
+  			else
+  			{
+  				$NOM_PROJET =  !empty($info->NOM_PROJET) ? $info->NOM_PROJET : 'N/A';
+  			}
+
+  			$DESCRIPTION_INSTITUTION='';
+  			if(strlen($info->DESCRIPTION_INSTITUTION) > 3)
+  			{
+  				$DESCRIPTION_INSTITUTION =  mb_substr($info->DESCRIPTION_INSTITUTION, 0, 3) .'...<a class="btn-sm" title="'.$info->DESCRIPTION_INSTITUTION.'"><i class="fa fa-eye"></i></a>';
+  			}
+  			else
+  			{
+  				$DESCRIPTION_INSTITUTION =  !empty($info->DESCRIPTION_INSTITUTION) ? $info->DESCRIPTION_INSTITUTION : 'N/A';
+  			}
+
+  			$DESCR_ETAPE='';
+  			if(strlen($info->DESCR_ETAPE) > 3)
+  			{
+  				$DESCR_ETAPE =  mb_substr($info->DESCR_ETAPE, 0, 3) .'...<a class="btn-sm" title="'.$info->DESCR_ETAPE.'"><i class="fa fa-eye"></i></a>';
+  			}
+  			else
+  			{
+  				$DESCR_ETAPE =  !empty($info->DESCR_ETAPE) ? $info->DESCR_ETAPE : 'N/A';
+  			}
+
+  			$post[]=$u++;
+  			$post[]=!empty($info->NUMERO_PROJET) ? $info->NUMERO_PROJET : 'N/A';
+  			$post[]=$NOM_PROJET;
+  			$post[]=$DESCRIPTION_INSTITUTION;
+  			$post[]=$DESCR_ETAPE;
+  			$post[]=!empty($info->DESCR_STATUT_PROJET) ? $info->DESCR_STATUT_PROJET : 'N/A';
+  			$detail = lang('messages_lang.detail');
+  			$action ="<a class='btn btn-primary btn-sm' title='{$detail}' href='".base_url("pip/Processus_Investissement_Public/details/".$info->ID_DEMANDE)."' ><i class='fa fa-list'></a>";
+
+  			$post[]= $action;
+  			$data[]=$post;  
+  		}
+
+  		$requeteqp='CALL `getList`("'.$query_principal.'")';
+  		$recordsTotal = $this->ModelPs->datatable( $requeteqp);
+  		$requeteqf='CALL `getList`("'.$query_filter.'")';
+  		$recordsFiltered = $this->ModelPs->datatable( $requeteqf);
+
+  		$output = array(
+  			"draw" => intval($_POST['draw']),
+  			"recordsTotal" =>count($recordsTotal),
+  			"recordsFiltered" => count($recordsFiltered),
+  			"data" => $data
+  		);
+  		echo json_encode($output);
+  	}
+  }
+  ?>

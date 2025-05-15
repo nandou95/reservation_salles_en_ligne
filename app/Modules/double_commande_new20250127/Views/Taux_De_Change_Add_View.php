@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <?php echo view('includesbackend/header.php');?>
+<?php $validation = \Config\Services::validation(); ?>
+</head>
+<body>
+  <div class="wrapper">
+    <?php echo view('includesbackend/navybar_menu.php');?>
+
+    <div class="main">
+      <?php echo view('includesbackend/navybar_topbar.php');?>
+      <main class="content">
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-12">
+              <div style="box-shadow: rgba(100, 100, 111, 0.25) 0px 7px 29px 0px;padding: 13px !important" class="card">
+
+                <div class="card-header">
+                  <div class="row col-md-12">
+                    <div class="col-md-6">
+                      <h1 class="header-title text-black">
+                        <?=$title; ?>
+                     </h1>
+                   </div>
+                   <div class="col-md-6" style="float: right;">
+
+                    <a href="<?=base_url('double_commande_new/Taux_De_Change/')?>" style="float: right;margin: 4px;" class="btn btn-primary"><span class="fa fa-list pull-right"></span> <?= lang('messages_lang.link_list') ?></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body">
+                <div class="table-responsive" style="width: 100%;">
+                  <div class="card-body">
+                    <form action="<?=base_url('double_commande_new/Taux_De_Change/save') ?>" method="POST" id="MyFormData">
+                      <div class="row col-md-12">
+                        <div class="col-md-6">
+                          <label><?= lang('messages_lang.labelle_devise') ?></label>
+                          <input type="text" name="DEVISE" id="DEVISE" class="form-control" maxlength="50" value="<?=set_value('DEVISE')?>">
+                           <font color="red" id="error_devise" ></font>
+                          <?= $validation->getError('DEVISE'); ?>
+                        </div>
+                        <div class="col-md-6">
+                          <label><?= lang('messages_lang.label_droit_taux') ?></label>
+                          <input onpaste="return false;" type="text" name="TAUX" id="TAUX"  class="form-control allownumericwithdecimal" value="<?=set_value('TAUX')?>">
+                          <font color="red" id="error_taux"></font>
+                          <?= $validation->getError('TAUX'); ?>
+                        </div>
+                      </div>
+                    </form> 
+                    <div class="row col-md-12">
+                      <div class="col-md-12" style="float: right;">
+                        <a id="btnSave" onclick="save()" type="button" style="float: right;margin-top: 20px;" class="btn btn-primary"><span class="fa fa-save pull-right"></span> <?= lang('messages_lang.bouton_enregistrer') ?></a>
+                      </div>
+                    </div>                 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <?php echo view('includesbackend/scripts_js.php');?>
+
+  </body>
+</html>
+
+<script>
+  function save()
+  {
+    var DEVISE = $('#DEVISE').val();
+    var TAUX = $('#TAUX').val();
+    var statut=1;
+
+    if (DEVISE == '')
+    {
+      statut=2;
+      $('#error_devise').html('<?= lang('messages_lang.error_sms') ?>');
+    }else{
+      $('#error_devise').html('');
+    }
+    if (TAUX == '')
+    {
+      statut=2;
+      $('#error_taux').html('<?= lang('messages_lang.error_sms') ?>');
+    }else{
+      $('#error_taux').html('');
+    }
+
+    if (statut==1)
+    {
+      $('#MyFormData').submit();
+    }
+
+  }
+</script>
+
+<script type="text/javascript">
+
+function getCalculMontant(input)
+{
+    // Remove all non-digit characters from the input value
+  var numericValue = input.value.replace(/\D/g, '');
+
+  // Format the numeric value with spaces as thousands separators
+  var formattedValue = numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  
+  // Set the formatted value back to the input field
+  input.value = formattedValue;
+}
+</script>
