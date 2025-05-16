@@ -1,376 +1,362 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <?php include('includes/header.php');?>
+  <?php echo view('includes_frontend/header.php');?>
 </head>
-
 <body>
-
-    <?php echo view('includes/menu.php');?>
-
-
-    <!-- Header Start -->
-    <div class="jumbotron jumbotron-fluid ">
-        <div class="container hero-text">
-            <h1 class="hero-title">Bienvenue </h1>
-            <h2 class="hero-caption mb-5"> Plateforme digitalisée de suivi-évaluation des projets et programmes financés par les partenaires au développement</h2>
+  <?php echo view('includes_frontend/menu_frontend.php');?>
+  <main>
+    <section>
+      <div class="container wow fadeIn">
+        <div id="oleezLandingCarousel" class="oleez-landing-carousel carousel slide" data-ride="carousel">
+          <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+              <img src="uploads/salle/prix_amour.jpg" alt="First slide" class="w-100">
+              <div class="carousel-caption">
+                <h2 data-animation="animated fadeInRight"><span>PRIX D'AMOUR</span></h2>
+                <h2 data-animation="animated fadeInRight"><span>Mariages et Conferences</span></h2>
+                <a href="#!" class="carousel-item-link" data-animation="animated fadeInRight">Lire plus</a>
+                <a href="<?=base_url()?>/reservation/5789485765" class="carousel-item-link" data-animation="animated fadeInRight">Réservation d’une salle</a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="uploads/salle/ariette_salle.jpg" alt="Second slide" class="w-100">
+              <div class="carousel-caption">
+                <h2 data-animation="animated fadeInRight"><span>ARIETTE SALLE</span></h2>
+                <h2 data-animation="animated fadeInRight"><span>Mariages et Conferences</span></h2>
+                <a href="#!" class="carousel-item-link" data-animation="animated fadeInRight">Lire plus</a>
+                <a href="#!" class="carousel-item-link" data-animation="animated fadeInRight">Réservation d’une salle</a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="uploads/salle/eriel_salle.jpg" alt="Third slide" class="w-100">
+              <div class="carousel-caption">
+                <h2 data-animation="animated fadeInRight"><span>Eriel Salle</span></h2>
+                <h2 data-animation="animated fadeInRight"><span>Mariages et Conferences</span></h2>
+                <a href="#!" class="carousel-item-link" data-animation="animated fadeInRight">Lire plus</a>
+                <a href="#!" class="carousel-item-link" data-animation="animated fadeInRight">Réservation d’une salle</a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="uploads/salle/nandy_salle.jpg" alt="Fourth slide" class="w-100">
+              <div class="carousel-caption">
+                <h2 data-animation="animated fadeInRight"><span>Nandy Salle</span></h2>
+                <h2 data-animation="animated fadeInRight"><span>Mariages et Conferences</span></h2>
+                <a href="#!" class="carousel-item-link" data-animation="animated fadeInRight">Lire plus</a>
+                <a href="<?=base_url()?>/reservation" class="carousel-item-link">Réservation d’une salle</a>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-    <!-- Header End -->
+      </div>
+    </section>
 
-
-
-    <!-- About Start -->
-    <div class="container-fluid py-5 apropos" id="apropos">
-        <div class="container">
-          <h1 class="my-5 text-center">A propos</h1>
-            <div class="row my-4 align-items-center">
-
-
-                <div class="col-lg-5 pb-lg-0">
-                    <img class="img-fluid w-100 h-100" src="assets_frontend/img/about_img3.png" alt="apropos">
-                  
-                </div>
-                <div class="col-lg-7">
-                    
-                    <p class="mb-4">La plateforme digitalisée de suivi-évaluation des projets programmes et financés par les partenaires au développement est une plateforme de suivi régulier des interventions des PAD gérant l’enregistrement des programmes et budgets des PAD, leur plan d’action,
-                         les différentes activités à réaliser ainsi que les informations en rapport avec la stratégie de chaque PAD</p>
-                    <div class="d-flex align-items-center logos pt-2">
-                       <img  src="assets_frontend/img/unhcr-logo.png" alt="UNHCR">
-                       <img  src="assets_frontend/img/UN_WOMEN_Logo.png" alt="UNHCR">
-                       <img src="assets_frontend/img/unfpa-vector-logo.png" alt="UNHCR">
-                       <img src="assets_frontend/img/unicef-logo.png" alt="UNHCR">
-                       <img src="assets_frontend/img/unitedNDP.png" alt="UNHCR">
-                       <img src="assets_frontend/img/United_Nations_logo.png" alt="UNHCR">
-                       <img src="assets_frontend/img/unicef-logo.png" alt="UNHCR">
-                    
-                    </div>
-                </div>
-              
+    <section class="oleez-landing-section oleez-landing-section-about">
+      <div class="container">
+        <div class="oleez-landing-section-content">
+          <div class="oleez-landing-section-verticals wow fadeIn">
+            <span class="number">01</span> <img src="assets_frontend/assets/images/Logo_2.svg" alt="ollez" height="12px">
+          </div>
+          <div class="row landing-about-content wow fadeInUp">
+            <div class="col-md-6">
+              <h2>Nous aidons les gens à louer des salles en ligne de façon simple, rapide et sécurisée.</h2>
             </div>
+            <div class="col-md-6">
+              <p>Nous accompagnons les particuliers et les professionnels dans la recherche et la réservation de salles en ligne, en leur offrant une plateforme intuitive qui permet de comparer facilement les espaces disponibles, consulter les tarifs, et effectuer une réservation en toute sécurité, en quelques clics.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 landing-about-feature wow fadeInUp">
+              <img src="assets_frontend/assets/images/icon_1.svg" alt="document" class="about-feature-icon">
+              <h5 class="about-feature-title">Mariage</h5>
+              <p class="about-feature-description">Trouvez la salle parfaite pour célébrer le plus beau jour de votre vie, avec des options élégantes et adaptées à tous les styles.</p>
+            </div>
+            <div class="col-md-4 landing-about-feature wow fadeInUp">
+              <img src="assets_frontend/assets/images/icon_2.svg" alt="document" class="about-feature-icon">
+              <h5 class="about-feature-title">Conférence</h5>
+              <p class="about-feature-description">Réservez des espaces professionnels équipés pour vos séminaires, réunions, formations ou conférences d’entreprise.</p>
+            </div>
+            <div class="col-md-4 landing-about-feature wow fadeInUp">
+              <img src="assets_frontend/assets/images/icon_3.svg" alt="document" class="about-feature-icon">
+              <h5 class="about-feature-title">Autres evenements</h5>
+              <p class="about-feature-description">Que ce soit pour un anniversaire, un lancement de produit ou une soirée privée, découvrez une large sélection de salles pour tous vos besoins.</p>
+            </div>
+          </div>
         </div>
-    
-    </div>
-    <!-- About End -->
+      </div>
+    </section>
 
-
-    <!--  PRESIDENT Start -->
-    <div class="container-fluid  president my-5">
-        <div class="container">
-            <div class="row  p-5">
-
-
-                <div class="col-lg-5">
-                    <img class="img-fluid w-100" src="assets_frontend/img/generalNeva.jpg" alt="president Burundi">
-                </div>
-
-                <div class="col-lg-7 py-lg-0">
-                  
-                    <h2 class="mb-5">Objectif de son Excellence le Président de la République</h2>
-                    <p class="my-5">L’objectif de Son Excellence le président de la république est de procéder à une digitalisation des services dans l’objectif de renforcer la transparence et ainsi combattre la fraude, les lenteurs administratives et la corruption </p>
-
-                    <div class="d-flex mt-5 g-5 social_net_pres">
-                      <div class="social_net_pres_icones"> <i class="fab fa-twitter"></i> </div> 
-                     <div class="social_net_pres_icones">  <i class="fab fa-facebook"></i> </div> 
-                         <div class="social_net_pres_icones">  <i class="fab fa-youtube"></i></div> 
-                 
-                </div>
-      
+    <section class="oleez-landing-section oleez-landing-section-projects">
+      <div class="container">
+        <div class="oleez-landing-section-content">
+          <div class="oleez-landing-section-verticals wow fadeIn">
+            <span class="number">02</span> <img src="assets_frontend/assets/images/Logo_2.svg" alt="oleez" height="12px">
+          </div>
+          <h2 class="section-title wow fadeInUp">Latest Projects <a href="#!" class="all-projects-link">View All</a></h2>
+          <div class="landing-projects-carousel wow fadeIn">
+            <div class="card landing-project-card">
+              <img src="assets_frontend/assets/images/Project_1@2x.jpg" class="card-img" alt="Project 1">
+              <div class="card-img-overlay">
+                <h6 class="project-category">Branding</h6>
+                <h5 class="project-title">BootstrapDash</h5>
+              </div>
             </div>
+            <div class="card landing-project-card">
+              <img src="assets_frontend/assets/images/Project_2@2x.jpg" class="card-img" alt="Project 1">
+              <div class="card-img-overlay">
+                <h6 class="project-category">Branding</h6>
+                <h5 class="project-title">BootstrapDash</h5>
+              </div>
+            </div>
+            <div class="card landing-project-card">
+              <img src="assets_frontend/assets/images/Project_3@2x.jpg" class="card-img" alt="Project 1">
+              <div class="card-img-overlay">
+                <h6 class="project-category">Branding</h6>
+                <h5 class="project-title">BootstrapDash</h5>
+              </div>
+            </div>
+            <div class="card landing-project-card">
+              <img src="assets_frontend/assets/images/Project_4@2x.jpg" class="card-img" alt="Project 1">
+              <div class="card-img-overlay">
+                <h6 class="project-category">Branding</h6>
+                <h5 class="project-title">BootstrapDash</h5>
+              </div>
+            </div>
+          </div>
+          <div class="slick-navbtn-wrapper"></div>
         </div>
-    </div>
-    </div>
-    <!-- PRESIDENT END-->
+      </div>
+    </section>
 
-    <div class="container-fluid mission " id="mission">
-        <div class="container">
-            <div class="section-header text-center">
-            <h1 class="my-4">Mission</h1>
+    <section class="oleez-landing-section oleez-landing-section-team">
+      <div class="container">
+        <div class="oleez-landing-section-content">
+          <div class="oleez-landing-section-verticals wow fadeIn">
+            <span class="number">03</span> <img src="assets_frontend/assets/images/Logo_2.svg" alt="ollez" height="12px">
+          </div>
+          <div class="row landing-team-content wow fadeInUp">
+            <div class="col-md-6">
+              <h2 class="section-title">Meet The Team <br> Our Professionals</h2>
+            </div>
+            <div class="col-md-6">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio corporis delectus dolorem possimus, dolor rerum.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 mb-5 mb-md-0 landing-team-card wow flipInY">
+              <img src="assets_frontend/assets/images/Team_3@2x.jpg" alt="Team Member" class="team-card-img">
+              <h5 class="team-card-name">Siri Jakobsson</h5>
+              <p class="team-card-job">Web Developer</p>
+              <nav class="team-card-social-links">
+                <a href="#!">Fb</a>
+                <a href="#!">Tw</a>
+                <a href="#!">In</a>
+              </nav>
+            </div>
+            <div class="col-md-4 mb-5 mb-md-0 landing-team-card wow flipInY">
+              <img src="assets_frontend/assets/images/Team_2@2x.jpg" alt="Team Member" class="team-card-img">
+              <h5 class="team-card-name">Arend Pellewever</h5>
+              <p class="team-card-job">Founder</p>
+              <nav class="team-card-social-links">
+                <a href="#!">Fb</a>
+                <a href="#!">Tw</a>
+                <a href="#!">In</a>
+              </nav>
+            </div>
+            <div class="col-md-4 mb-5 mb-md-0 landing-team-card wow flipInY">
+              <img src="assets_frontend/assets/images/Team_1@2x.jpg" alt="Team Member" class="team-card-img">
+              <h5 class="team-card-name">Antokolskiy</h5>
+              <p class="team-card-job">Web Developer</p>
+              <nav class="team-card-social-links">
+                <a href="#!">Fb</a>
+                <a href="#!">Tw</a>
+                <a href="#!">In</a>
+              </nav>
+            </div>
+          </div>
         </div>
-            <div class="row align-items-center p-5">
-             
-                <div class="col py-2 py-lg-0">
-                  
-                  <P class="mission_top text-center">
-                    Le bureau des Études Stratégique et de Développement (BESD) fonctionne comme le Think tank national dans son rôle d’appui à la planification, à la programmation du développement économique, à l’analyse économique ainsi que le suivi et évaluation de l’action gouvernementale.  
-                  </P>
-                </div>
+      </div>
+    </section>
 
-                <div class="row">
-                    <div class="card">
-                        
-                        <div class="card-body">
-                    
-                          <p class="card-text">
-                            Aider dans la conception et l'élaboration des politiques publiques à court, moyen et long terme, en procédant à des investigations minutieuses notamment dans les domaines de la croissance économique, la création d'emplois, la satisfaction des besoins, la protection de l'environnement, l'innovation éducative et la formation, la démocratie et le climat des affaires en collaboration avec les autres services de l’Etat
-
-                          </p>
-
-                          <hr>
-                          <p>
-                            Contribuer à la coordination du cadrage macroéconomique et des politiques sectorielles en collaboration avec les organes et structures gouvernementales établis à cet effet 
-
-                          </p>
-                          <hr>
-
-                          <p>
-                            Participer à la prévention des crises notamment par la mise au point d'un système de veille stratégique qui comprend en particulier les fonctions d'élaboration des stratégies adaptées de coordination, suivi et évaluation, appuyé par un système d'information et d'alerte précoce 
-                          </p>
-                          <hr>
-                          <p>
-                            Identifier des projets à haut potentiel d'innovation et analyser leur faisabilité ainsi que leur impact sur la croissance économique et sociale pour un développement durable ;   assurer le suivi des grands projets d'envergure nationale
-                          </p>
-                          <hr>
-                          <p>
-                            Faire périodiquement des synthèses de nouvelles idées, techniques et technologies pouvant être diffusées dans toutes les couches sociales et susceptibles d'aider le pays à gagner le pari de la croissance économique et de la lutte contre la pauvreté
-                          </p>
-                          <hr>
-                          <P>
-                            Etablir un cadre permettant de tirer profit de l'expertise nationale et étrangère pouvant contribuer au développement du pays 
-                          </P>
-                          <hr>
-                          <p>
-                           Renforcer la capacité analytique de prévision et évaluation basée sur les concepts et méthodes empiriques modernes pour faciliter la conception, l'élaboration, l'application et l'évaluation des politiques du Gouvernement 
-                          </p>
-                          <hr>
-                          <p>
-                            Traiter et suivre les questions de développement spécifiques notamment celles relatives à la politique nationale de la population, les enjeux du dividende démographique et produire des notes analytiques 
-                          </p>
-                          <hr>
-                          <p>
-                            SuiHomevre la politique économique du pays, l'évolution de l'économie internationale et l'impact du dividende démographique
-                          </p>
-
-                          <hr>
-                          <p>
-                            
-                            Participer au suivi et supervision de la préparation du portefeuille des entreprises publiques et parapubliques ainsi que le mouvement coopératif 
-
-                          </p>
-                          <hr>
-                          <p>
-                            Participer à l'élaboration du Plan d'Actions Annuel du Gouvernement et contribuer aux tâches d'évaluation du Gouvernement 
-                          </p>
-                          <hr>
-                          <p>
-                            Contribuer à la coordination des activités du Comité d'Evaluation des Performances des Organes de l'Administration Publique 
-                          </p>
-
-                          <hr>
-                          <p>
-                            S’impliquer dans l'élaboration des politiques de développement du pays 
-                          </p>
-                          <hr>
-                          <p>
-                            Servir comme un instrument d'intelligence socio-économique,
-                          </p>
-                          <p>
-                            Proposer des mécanismes visant le développement, la coordination et le renforcement des capacités du personnel de la Présidence de la République 
-                          </p>
-                          <hr>
-                          <p>
-                            Suivi des projets prioritaires du Gouvernement
-                          </p>
-                          <hr>
-                          <p>
-                            Élaborer des critères de choix des aides ;   assurer la coordination des aides 
-                          </p>
-                          <hr>
-                          <p>
-                            Donner des avis sur les secteurs prioritaires d'affectation de l'aide au développement 
-                          </p>
-                          <hr>
-                          <p>
-                            Proposer des modules de renforcement des capacités
-                          </p>
-                        </div>
-                      </div>
-                </div>
-
-                
-                
-      
+    <section class="oleez-landing-section oleez-landing-section-client">
+      <div class="container">
+        <div class="oleez-landing-section-content">
+          <div class="oleez-landing-section-verticals wow fadeIn">
+            <span class="number">04</span> <img src="assets_frontend/assets/images/Logo_2.svg" alt="ollez" height="12px">
+          </div>
+          <h2 class="section-title mb-1 wow fadeInUp">Partners & clients</h2>
+          <p class="client-section-subtitle">We’re constantly refining our product. Adding new features. Working to help your business grow.</p>
+          <div class="row">
+            <div class="col-md-4 client-logo-wrapper wow flipInX">
+              <div class="client-logo">
+                <img src="assets_frontend/assets/images/client_4.png" alt="client" height="50px">
+              </div>
             </div>
+            <div class="col-md-4 client-logo-wrapper wow flipInX">
+              <div class="client-logo">
+                <img src="assets_frontend/assets/images/client_2.png" alt="client" height="50px">
+              </div>
+            </div>
+            <div class="col-md-4 client-logo-wrapper wow flipInX">
+              <div class="client-logo">
+                <img src="assets_frontend/assets/images/client_1.png" alt="client" height="50px">
+              </div>
+            </div>
+            <div class="col-md-4 client-logo-wrapper wow flipInX">
+              <div class="client-logo">
+                <img src="assets_frontend/assets/images/client_6.png" alt="client" height="50px">
+              </div>
+            </div>
+            <div class="col-md-4 client-logo-wrapper wow flipInX">
+              <div class="client-logo">
+                <img src="assets_frontend/assets/images/client_3.png" alt="client" height="50px">
+              </div>
+            </div>
+            <div class="col-md-4 client-logo-wrapper wow flipInX">
+              <div class="client-logo">
+                <img src="assets_frontend/assets/images/client_5.png" alt="client" height="50px">
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
+    </section>
 
-
-    
-      <!-- procedures Start -->
-      <div class="container-xxl decret p-5 px-2" id="decret">
-        <div class="container-fluid">
-            <div class="text-center  mx-auto wow fadeInUp my-5" data-wow-delay="0.1s" style="max-width: 500px;">
-                <h1 class="display-6">Textes réglementaires</h1>
-            </div>
-            <div class="row my-4 g-5 p-5">
-                <div class="col-md-12">
-           
-                    <?php
-                    foreach ($frontend_decret as $key) {
-                     ?>
-                     <button class="accordion"><?=$key->NUMERO_DECRET?> DU <?=$key->DATE_DECRET?> </button>
-
-                    <div class="panel" style="text-align: center;">
-                      <p><?=$key->DESCRIPTION?></p>
-                      <a download class="btn btn-primary" href="<?=base_url('ShowFile/'.$key->FILE_DECRET)?>"><i class="fa fa-download"></i> Télécharger</a>
+    <section class="oleez-landing-section oleez-landing-section-news">
+      <div class="container">
+        <div class="oleez-landing-section-content">
+          <div class="oleez-landing-section-verticals wow fadeIn">
+            <span class="number">05</span> <img src="assets_frontend/assets/images/Logo_2.svg" alt="ollez" height="12px">
+          </div>
+          <h2 class="section-title wow fadeInUp">Recent News & Stories.</h2>
+          <p class="news-section-subtitle wow fadeInUp">Share your stories and news with everyone.</p>
+          <div class="row">
+            <div class="col-lg-4 mb-4 mb-lg-0">
+              <div class="news-card news-card-1 wow fadeInUp">
+                <div class="card-body">
+                  <div class="author-info media">
+                    <img src="assets_frontend/assets/images/Team_1_Copy_2@2x.jpg" alt="author" class="author-avatar">
+                    <div class="media-body">
+                      <h6 class="author-name">Posted by Colabrio</h6>
+                      <p class="news-post-date">July 5, 2019</p>
                     </div>
-                     <?php
-                    }
-                    ?>
-                    
-                    
-                    <!-- <button class="accordion">Décret n°100/063 du 22 septembre 2020 </button>
-                    <div class="panel">
-                      <p>Décret n°100/063 du 22 septembre 2020 portant Modification du Décret n° 100/141
-                         du 25 août 2008 portant Réorganisation des Services de la Présidence de la République </p>
-                    </div>
-                    
-                    <button class="accordion">Décret n°100/007 du 28 juin 2020 </button>
-                    <div class="panel">
-                      <p>Décret n°100/007 du 28 juin 2020 portant Révision du Décret n°100/037 du 19 
-                        avril 2018 portant Structure, Fonctionnement et Missions du Gouvernement de la République du Burundi</p>
-                    </div>
-                    <button class="accordion">La Loi n°1/09 du 13 novembre 2020 </button>
-                    <div class="panel">
-                      <p>La Loi n°1/09 du 13 novembre 2020 portant
-                         Modification de la Loi n°1/08 du 28 avril 2011 portant Organisation Générale de l'Administration Publique</p>
-                    </div>
-
-                    <button class="accordion">La Constitution de la République du Burundi </button>
-                    <div class="panel">
-                      <p>La Constitution de la République du Burundi </p>
-                    </div> -->
-
-
-
-
-
-
+                  </div>
+                  <div class="post-meta">
+                    <span class="post-category">Digital Strategy</span> 4 min read
+                  </div>
+                  <h5 class="post-title">The Ultimate Guide to Make Your WordPress Journal.</h5>
+                  <a href="#!" class="post-permalink">Read more </a>
                 </div>
-                
-                   <!--  <div class="col-md-4">
-                      <div class="card"></div>
-                </div> -->
-               
-             
-           
+              </div>
             </div>
+            <div class="col-lg-4 mb-4 mb-lg-0">
+              <div class="news-card news-card-2 wow fadeInUp">
+                <div class="card-body">
+                  <div class="author-info media">
+                    <img src="assets_frontend/assets/images/Team_2_Copy_2@2x.jpg" alt="author" class="author-avatar">
+                    <div class="media-body">
+                      <h6 class="author-name">Posted by Stormie</h6>
+                      <p class="news-post-date">July 5, 2019</p>
+                    </div>
+                  </div>
+                  <div class="post-meta">
+                    <span class="post-category">Personal</span> 4 min read
+                  </div>
+                  <h5 class="post-title">The Highly Contemporary UI/UX Design from a london.</h5>
+                  <a href="#!" class="post-permalink">Read more </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 mb-4 mb-lg-0">
+              <div class="news-card news-card-3 wow fadeInUp">
+                <div class="card-body">
+                  <div class="author-info media">
+                    <img src="assets_frontend/assets/images/Team_3_Copy_2@2x.jpg" alt="author" class="author-avatar">
+                    <div class="media-body">
+                      <h6 class="author-name">Posted by Angela</h6>
+                      <p class="news-post-date">July 5, 2019</p>
+                    </div>
+                  </div>
+                  <div class="post-meta">
+                    <span class="post-category">Personal</span> 4 min read
+                  </div>
+                  <h5 class="post-title">A Color Exercise for our Brand’s Illustration </h5>
+                  <a href="#!" class="post-permalink">Read more </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-    <!-- procedures End -->
+      </div>
+    </section>
 
-       <!-- procedures Start -->
-       <div class="container-xxl procedures  py-2" id=" procedures">
-        <div class="container">
-            <div class="text-center  mx-auto wow fadeInUp my-5" data-wow-delay="0.1s" style="max-width: 500px;">
-                <h1 class="display-6">Procédures </h1>
+    <section class="oleez-landing-section oleez-landing-section-testimonials">
+      <div class="container">
+        <div class="oleez-landing-section-content">
+          <div class="oleez-landing-section-verticals wow fadeIn">
+            <span class="number">05</span> <img src="assets_frontend/assets/images/Logo_2.svg" alt="ollez" height="12px">
+          </div>
+          <div class="d-md-flex justify-content-between wow fadeInUp">
+            <div class="testimonial-section-content">
+              <h2 class="section-title">What our clients say</h2>
+              <p class="section-subtitle">Share your stories and news with everyone.</p>
             </div>
-            <div class="row my-4 g-5">
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="d-flex align-items-start">
-                        <img class="img-fluid flex-shrink-0" src="assets_frontend/img/agreement2-01.svg" alt="">
-                        <div class="ps-4">
-                            <h5 class="mb-3">Agrément</h5>
-                            <span>Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit
-                                clita duo justo</span>
-                        </div>
-                    </div>
+            <div class="testimonial-carousel-navbtn-wrapper"></div>
+          </div>
+          <div class="landing-testimonial-carousel wow fadeInUp">
+            <div class="landing-testimonial-card">
+              <div class="media">
+                <img src="assets_frontend/assets/images/Client_1@2x.jpg" alt="client" class="testimonial-card-img">
+                <div class="media-body">
+                  <p class="testimonial-card-content">
+                    The revulsion in our feelings was therefore all the greater when the car suddenly escaped from this height of desolation, and a magnificent prospect burst upon our view.
+                  </p>
+                  <h6 class="testimonial-card-name">Winnie Warner</h6>
+                  <p class="testimonial-card-company">Creative Company</p>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="d-flex align-items-start">
-                        <img class="img-fluid flex-shrink-0" src="assets_frontend/img/save2-01.svg" alt="">
-                        <div class="ps-4">
-                            <h5 class="mb-3">Enregistrement des programmes et projets </h5>
-                            <span>Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit
-                                clita duo justo</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="d-flex align-items-start">
-                        <img class="img-fluid flex-shrink-0" src="assets_frontend/img/survey2-01.svg" alt="">
-                        <div class="ps-4">
-                            <h5 class="mb-3">Suivi-évaluation</h5>
-                            <span>Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit
-                                clita duo justo</span>
-                        </div>
-                    </div>
-                </div>
-             
-             
+              </div>
             </div>
+            <div class="landing-testimonial-card">
+              <div class="media">
+                <img src="assets_frontend/assets/images/Client_2@2x.jpg" alt="client" class="testimonial-card-img">
+                <div class="media-body">
+                  <p class="testimonial-card-content">
+                    The revulsion in our feelings was therefore all the greater when the car suddenly escaped from this height of desolation, and a magnificent prospect burst upon our view.
+                  </p>
+                  <h6 class="testimonial-card-name">Wesley Ford</h6>
+                  <p class="testimonial-card-company">Creative Company</p>
+                </div>
+              </div>
+            </div>
+            <div class="landing-testimonial-card">
+              <div class="media">
+                <img src="assets_frontend/assets/images/Client_3@2x.jpg" alt="client" class="testimonial-card-img">
+                <div class="media-body">
+                  <p class="testimonial-card-content">
+                    The revulsion in our feelings was therefore all the greater when the car suddenly escaped from this height of desolation, and a magnificent prospect burst upon our view.
+                  </p>
+                  <h6 class="testimonial-card-name">Winnie Warner</h6>
+                  <p class="testimonial-card-company">Creative Company</p>
+                </div>
+              </div>
+            </div>
+            <div class="landing-testimonial-card">
+              <div class="media">
+                <img src="assets_frontend/assets/images/Client_4@2x.jpg" alt="client" class="testimonial-card-img">
+                <div class="media-body">
+                  <p class="testimonial-card-content">
+                    The revulsion in our feelings was therefore all the greater when the car suddenly escaped from this height of desolation, and a magnificent prospect burst upon our view.
+                  </p>
+                  <h6 class="testimonial-card-name">Wesley Ford</h6>
+                  <p class="testimonial-card-company">Creative Company</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-    <!-- procedures End -->
-
-
-    <!-- Testimonial Start -->
-    <div class="container-fluid py-5 FAQ" id="FAQ">
-        <div class="container">
-            <div class="text-center pb-2">
-                <h1 class="mb-4">FAQ</h1>
-            </div>
-
-            <div class="owl-carousel testimonial-carousel">
-                <div class="position-relative p-4">
-                    <i class="fa fa-3x fa-quote-right text-primary position-absolute" style="top: -6px; right: 0;"></i>
-                    <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid rounded-circle" src="assets_frontend/img/R.jpg" style="width: 60px; height: 60px;" alt="">
-                        <div class="ml-3">
-                            <h6 class="font-weight-semi-bold m-0">Ndayizeye Christian</h6>
-                            <small>Cabinet</small>
-                        </div>
-                    </div>
-                    <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr clita lorem. Dolor ipsum sanct clita</p>
-                </div>
-
-                <div class="position-relative p-4">
-                    <i class="fa fa-3x fa-quote-right text-primary position-absolute" style="top: -6px; right: 0;"></i>
-                    <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid rounded-circle" src="assets_frontend/img/R.jpg" style="width: 60px; height: 60px;" alt="">
-                        <div class="ml-3">
-                            <h6 class="font-weight-semi-bold m-0">Ndayizeye Christian</h6>
-                            <small>Cabinet</small>
-                        </div>
-                    </div>
-                    <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr clita lorem. Dolor ipsum sanct clita</p>
-                </div>
-
-                <div class="position-relative p-4">
-                    <i class="fa fa-3x fa-quote-right text-primary position-absolute" style="top: -6px; right: 0;"></i>
-                    <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid rounded-circle" src="assets_frontend/img/R.jpg" style="width: 60px; height: 60px;" alt="">
-                        <div class="ml-3">
-                            <h6 class="font-weight-semi-bold m-0">Ndayizeye Christian</h6>
-                            <small>Cabinet</small>
-                        </div>
-                    </div>
-                    <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr clita lorem. Dolor ipsum sanct clita</p>
-                </div>
-
-                <div class="position-relative  p-4">
-                    <i class="fa fa-3x fa-quote-right text-primary position-absolute" style="top: -6px; right: 0;"></i>
-                    <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid rounded-circle" src="assets_frontend/img/R.jpg" style="width: 60px; height: 60px;" alt="">
-                        <div class="ml-3">
-                            <h6 class="font-weight-semi-bold m-0">Ndayizeye Christian</h6>
-                            <small>Cabinet</small>
-                        </div>
-                    </div>
-                    <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr clita lorem. Dolor ipsum sanct clita</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Testimonial End -->
-
-
-    <?php echo view('includes/footer.php');?>
-
-
-   
+      </div>
+    </section>
+  </main>
+  <?php echo view('includes_frontend/footer.php');?>
 </body>
-
 </html>
