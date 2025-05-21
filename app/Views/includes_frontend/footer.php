@@ -34,7 +34,7 @@
           </div>
           <div class="d-flex align-items-center">
             <i class="fa fa-phone-alt text-primary me-3"></i>
-            <p class="text-white mb-0">(+257) 69 301 985 / 71 483 905 </p>
+            <p class="text-white mb-0">(+257) 69 301 985 / 71 483 905</p>
           </div>
           <div class="d-flex align-items-center mb-4">
             <i class="fab fa-firefox-browser text-primary me-3"></i>

@@ -13,7 +13,7 @@
     <!-- Carousel Start -->
     <div class="header-carousel owl-carousel">
       <div class="header-carousel-item">
-        <img src="uploads/salle/carousel-2.jpg" class="img-fluid w-100" alt="Image">
+        <img src="<?=base_url()?>/uploads/salle/carousel-2.jpg" class="img-fluid w-100" alt="Image">
         <div class="carousel-caption">
           <div class="container">
             <div class="row g-5">
@@ -43,7 +43,7 @@
       </div>
 
       <div class="header-carousel-item">
-        <img src="uploads/salle/carousel-1.jpg" class="img-fluid w-100" alt="Image">
+        <img src="<?=base_url()?>/uploads/salle/carousel-1.jpg" class="img-fluid w-100" alt="Image">
         <div class="carousel-caption">
           <div class="container">
             <div class="row g-5">
@@ -93,7 +93,7 @@
         <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
           <div class="service-item">
             <div class="service-img">
-              <img src="uploads/service/service-1.jpg" class="img-fluid rounded-top w-100" alt="Image">
+              <img src="<?=base_url()?>/uploads/service/service-1.jpg" class="img-fluid rounded-top w-100" alt="Image">
             </div>
             <div class="rounded-bottom p-4">
               <a href="#" class="h4 d-inline-block mb-4"> Strategy Consulting</a>
@@ -106,7 +106,7 @@
         <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
           <div class="service-item">
             <div class="service-img">
-              <img src="uploads/service/service-2.jpg" class="img-fluid rounded-top w-100" alt="Image">
+              <img src="<?=base_url()?>/uploads/service/service-2.jpg" class="img-fluid rounded-top w-100" alt="Image">
             </div>
             <div class="rounded-bottom p-4">
               <a href="#" class="h4 d-inline-block mb-4">Financial Advisory</a>
@@ -119,7 +119,7 @@
         <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.6s">
           <div class="service-item">
             <div class="service-img">
-              <img src="uploads/service/service-3.jpg" class="img-fluid rounded-top w-100" alt="Image">
+              <img src="<?=base_url()?>/uploads/service/service-3.jpg" class="img-fluid rounded-top w-100" alt="Image">
             </div>
             <div class="rounded-bottom p-4">
               <a href="#" class="h4 d-inline-block mb-4">Managements</a>
@@ -146,14 +146,14 @@
         <div class="blog-item p-4">
           <div class="service-item">
             <div class="service-img">
-              <img src="uploads/service/service-1.jpg" class="img-fluid rounded-top w-100" alt="Image">
+              <img src="<?=base_url()?>/uploads/service/service-1.jpg" class="img-fluid rounded-top w-100" alt="Image">
             </div>
             <div class="rounded-bottom p-4">
               <a href="#" class="h4 d-inline-block mb-4"> Strategy Consulting</a>
               <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, sint? Excepturi facilis neque nesciunt similique officiis veritatis,
               </p>
               <div class="d-flex align-items-center">
-                <img src="uploads/testimonial/testimonial-1.jpg" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="">
+                <img src="<?=base_url()?>/uploads/testimonial/testimonial-1.jpg" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="">
                 <div class="col-md-6">
                   <div class="ms-3">
                     <h5>Admin</h5>
@@ -161,7 +161,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Réserver</a>
+                  <a class="btn btn-primary rounded-pill py-2 px-4" href="<?=base_url()?>/reservation/1">Réserver</a>
                 </div>
               </div>
             </div>
@@ -170,14 +170,14 @@
         <div class="blog-item p-4">
           <div class="service-item">
             <div class="service-img">
-              <img src="uploads/service/service-1.jpg" class="img-fluid rounded-top w-100" alt="Image">
+              <img src="<?=base_url()?>/uploads/service/service-1.jpg" class="img-fluid rounded-top w-100" alt="Image">
             </div>
             <div class="rounded-bottom p-4">
               <a href="#" class="h4 d-inline-block mb-4"> Strategy Consulting</a>
               <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, sint? Excepturi facilis neque nesciunt similique officiis veritatis,
               </p>
               <div class="d-flex align-items-center">
-                <img src="uploads/testimonial/testimonial-1.jpg" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="">
+                <img src="<?=base_url()?>/uploads/testimonial/testimonial-1.jpg" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="">
                 <div class="col-md-6">
                   <div class="ms-3">
                     <h5>Admin</h5>
@@ -185,7 +185,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Réserver</a>
+                  <a class="btn btn-primary rounded-pill py-2 px-4" href="<?=base_url()?>/reservation/1">Réserver</a>
                 </div>
               </div>
             </div>
@@ -194,14 +194,14 @@
         <div class="blog-item p-4">
           <div class="service-item">
             <div class="service-img">
-              <img src="uploads/service/service-1.jpg" class="img-fluid rounded-top w-100" alt="Image">
+              <img src="<?=base_url()?>/uploads/service/service-1.jpg" class="img-fluid rounded-top w-100" alt="Image">
             </div>
             <div class="rounded-bottom p-4">
               <a href="#" class="h4 d-inline-block mb-4"> Strategy Consulting</a>
               <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, sint? Excepturi facilis neque nesciunt similique officiis veritatis,
               </p>
               <div class="d-flex align-items-center">
-                <img src="uploads/testimonial/testimonial-1.jpg" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="">
+                <img src="<?=base_url()?>/uploads/testimonial/testimonial-1.jpg" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="">
                 <div class="col-md-6">
                   <div class="ms-3">
                     <h5>Admin</h5>
@@ -209,7 +209,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Réserver</a>
+                  <a class="btn btn-primary rounded-pill py-2 px-4" href="<?=base_url()?>/reservation/1">Réserver</a>
                 </div>
               </div>
             </div>
@@ -218,14 +218,14 @@
         <div class="blog-item p-4">
           <div class="service-item">
             <div class="service-img">
-              <img src="uploads/service/service-1.jpg" class="img-fluid rounded-top w-100" alt="Image">
+              <img src="<?=base_url()?>/uploads/service/service-1.jpg" class="img-fluid rounded-top w-100" alt="Image">
             </div>
             <div class="rounded-bottom p-4">
               <a href="#" class="h4 d-inline-block mb-4"> Strategy Consulting</a>
               <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, sint? Excepturi facilis neque nesciunt similique officiis veritatis,
               </p>
               <div class="d-flex align-items-center">
-                <img src="uploads/testimonial/testimonial-1.jpg" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="">
+                <img src="<?=base_url()?>/uploads/testimonial/testimonial-1.jpg" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="">
                 <div class="col-md-6">
                   <div class="ms-3">
                     <h5>Admin</h5>
@@ -233,7 +233,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Réserver</a>
+                  <a class="btn btn-primary rounded-pill py-2 px-4" href="<?=base_url()?>/reservation/1">Réserver</a>
                 </div>
               </div>
             </div>

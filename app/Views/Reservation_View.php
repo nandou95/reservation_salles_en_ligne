@@ -15,11 +15,11 @@
     <!-- Header Start -->
     <div class="container-fluid bg-breadcrumb">
       <div class="container text-center py-5" style="height: 100px;">
-        <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Contactez-nous</h4>
+        <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Réservation</h4>
         <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item"><a href="#">Pages</a></li>
-          <li class="breadcrumb-item active text-primary">Contact</li>
+          <li class="breadcrumb-item active text-primary">Réserver</li>
         </ol>    
       </div>
     </div>
@@ -123,11 +123,6 @@
                 </div>
               </form>
             </div>
-          </div>
-        </div>
-        <div class="col-xl-6 wow fadeInRight" data-wow-delay="0.2s">
-          <div class="rounded h-100">
-            <iframe class="rounded h-100 w-100" style="height: 400px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63658.63166583808!2d29.309359!3d-3.382222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18e8cfd4e73d71b5%3A0x9b5293ea0dd65e9b!2sBujumbura%2C%20Burundi!5e0!3m2!1sfr!2sbi!4v1716288480000!5m2!1sfr!2sbi" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </div>

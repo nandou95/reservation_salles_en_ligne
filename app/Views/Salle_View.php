@@ -81,7 +81,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Réserver</a>
+                  <a class="btn btn-primary rounded-pill py-2 px-4" href="<?=base_url()?>/reservation/1">Réserver</a>
                 </div>
               </div>
             </div>
@@ -105,7 +105,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Réserver</a>
+                  <a class="btn btn-primary rounded-pill py-2 px-4" href="<?=base_url()?>/reservation/1">Réserver</a>
                 </div>
               </div>
             </div>
@@ -129,7 +129,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Réserver</a>
+                  <a class="btn btn-primary rounded-pill py-2 px-4" href="<?=base_url()?>/reservation/1">Réserver</a>
                 </div>
               </div>
             </div>
@@ -153,7 +153,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Réserver</a>
+                  <a class="btn btn-primary rounded-pill py-2 px-4" href="<?=base_url()?>/reservation/1">Réserver</a>
                 </div>
               </div>
             </div>
@@ -189,7 +189,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Réserver</a>
+                  <a class="btn btn-primary rounded-pill py-2 px-4" href="<?=base_url()?>/reservation/1">Réserver</a>
                 </div>
               </div>
             </div>
@@ -213,7 +213,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Réserver</a>
+                  <a class="btn btn-primary rounded-pill py-2 px-4" href="<?=base_url()?>/reservation/1">Réserver</a>
                 </div>
               </div>
             </div>
@@ -237,7 +237,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Réserver</a>
+                  <a class="btn btn-primary rounded-pill py-2 px-4" href="<?=base_url()?>/reservation/1">Réserver</a>
                 </div>
               </div>
             </div>
@@ -261,7 +261,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Réserver</a>
+                  <a class="btn btn-primary rounded-pill py-2 px-4" href="<?=base_url()?>/reservation/1">Réserver</a>
                 </div>
               </div>
             </div>
@@ -297,7 +297,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Réserver</a>
+                  <a class="btn btn-primary rounded-pill py-2 px-4" href="<?=base_url()?>/reservation/1">Réserver</a>
                 </div>
               </div>
             </div>
@@ -321,7 +321,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Réserver</a>
+                  <a class="btn btn-primary rounded-pill py-2 px-4" href="<?=base_url()?>/reservation/1">Réserver</a>
                 </div>
               </div>
             </div>
@@ -345,7 +345,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Réserver</a>
+                  <a class="btn btn-primary rounded-pill py-2 px-4" href="<?=base_url()?>/reservation/1">Réserver</a>
                 </div>
               </div>
             </div>
@@ -369,7 +369,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Réserver</a>
+                  <a class="btn btn-primary rounded-pill py-2 px-4" href="<?=base_url()?>/reservation/1">Réserver</a>
                 </div>
               </div>
             </div>
