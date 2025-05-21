@@ -18,15 +18,11 @@ $routes->set404Override(function()
 $routes->get('lang/{locale}', 'Language::index');
 #################### Debut home #################
 $routes->match(['get', 'post'], '/', 'Home::index');
-#################### Fin home #####################
-
-############### module administration ##################
-// $routes->group('Administration', ['namespace' => 'App\Modules\Administration\Controllers'], function ($routes)
-// {
-// 	$routes->get('Menu_Engagement_Juridique/exporter_Excel_deja_fait/(:any)','Menu_Engagement_Juridique::exporter_Excel_deja_fait/$1');
-// 	$routes->get('Liquidation_Double_Commande/exporter_Excel_deja_fait/(:any)','Liquidation_Double_Commande::exporter_Excel_deja_fait/$1');
-// });
-############### module administration ##################
+$routes->match(['get', 'post'], 'service', 'Home::service');
+$routes->match(['get', 'post'], 'about_us', 'Home::about_us');
+$routes->match(['get', 'post'], 'salle/(:any)', 'Home::salle/$1');
+$routes->match(['get', 'post'], 'contact_nous', 'Home::contact_nous');
+#################### Fin home ###################
 
 if(is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
 {

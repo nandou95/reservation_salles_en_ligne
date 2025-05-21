@@ -29,32 +29,38 @@ class Home extends BaseController
     return view('About_us_View');
   }
 
-  public function reservation($id)
+  public function service()
   {
-    $titre='Titre';
-    $data['titre']=$titre
-    $data['id']=$id;
-    return view('Reservation_View',$data);
+    return view('Service_View');
   }
 
-  public function mariage()
+  public function salle($i=1)
   {
-    return view('Mariage_View');
-  }
+    $commune_id=0;
+    $province_id=0;
+    $date_evenement=0;
+    $evenement="Mariage";
+    if($i==2)
+      $evenement="Conférence";
+    if($i==3)
+      $evenement="Autres événements";
 
-  public function conferences()
-  {
-    return view('Conferences_View');
-  }
-
-  public function autres_evenements()
-  {
-    return view('Autres_evenements_View');
+    $data['i']=$i;
+    $data['evenement']=$evenement;
+    return view('Salle_View',$data);
   }
 
   public function contact_nous()
   {
     return view('Contact_nous_View');
+  }
+
+  public function reservation($id)
+  {
+    $titre='Titre';
+    $data['titre']=$titre;
+    $data['id']=$id;
+    return view('Reservation_View',$data);
   }
 }
 ?>

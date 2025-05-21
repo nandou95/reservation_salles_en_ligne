@@ -1,10 +1,26 @@
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>RSE</title>
-<link rel="stylesheet" href="<?=base_url()?>/assets_frontend/assets/vendors/animate.css/animate.min.css">
-<link rel="stylesheet" href="<?=base_url()?>/assets_frontend/assets/vendors/slick-carousel/slick.css">
-<link rel="stylesheet" href="<?=base_url()?>/assets_frontend/assets/vendors/slick-carousel/slick-theme.css">
-<link rel="stylesheet" href="<?=base_url()?>/assets_frontend/assets/css/style.css">
-<script src="<?=base_url()?>/assets_frontend/assets/vendors/jquery/jquery.min.js"></script>
-<script src="<?=base_url()?>/assets_frontend/assets/js/loader.js"></script>
+<meta charset="utf-8">
+<title>Réservation en ligne de salles de cérémonies et de conférences</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
+
+<!-- Google Web Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<!-- Icon Font Stylesheet -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Libraries Stylesheet -->
+<link rel="stylesheet" href="<?=base_url()?>/assets_frontend/lib/animate/animate.min.css"/>
+<link href="<?=base_url()?>/assets_frontend/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+<link href="<?=base_url()?>/assets_frontend/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+
+<!-- Customized Bootstrap Stylesheet -->
+<link href="<?=base_url()?>/assets_frontend/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Template Stylesheet -->
+<link href="<?=base_url()?>/assets_frontend/css/style.css" rel="stylesheet">
